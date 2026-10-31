@@ -6,7 +6,6 @@ import { BusGlyph, CarGlyph, TrainGlyph } from '../Icons';
 import KakaoMap from '../KakaoMap';
 import MapLinks from '../MapLinks';
 import Section from '../Section';
-import VenueMap from '../VenueMap';
 import styles from './Location.module.scss';
 import type { ReactNode } from 'react';
 
@@ -28,8 +27,8 @@ function TransportItem({ guide }: { guide: TransportGuide }) {
         <h3 className={styles['location__guide-title']}>{guide.title}</h3>
         {guide.items.map((item) => (
           <p key={item.label} className={styles['location__guide-text']}>
-            <strong>[{item.label}]</strong> {item.text}
-            {item.address && <span className={styles['location__guide-address']}>({item.address})</span>}
+            <strong>[{item.label}]</strong>
+            {item.text}
           </p>
         ))}
       </div>
@@ -47,9 +46,6 @@ export default function Location() {
       <AddressCopy address={WEDDING.address} />
       <KakaoMap />
       <MapLinks />
-      <div className={styles.location__map} data-reveal="zoom">
-        <VenueMap />
-      </div>
       <ul className={styles.location__transports}>
         {TRANSPORT.map((guide) => (
           <TransportItem key={guide.kind} guide={guide} />

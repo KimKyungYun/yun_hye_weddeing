@@ -19,10 +19,10 @@ export default function InvitationPage() {
       <WeddingDate />
       <LeafDivider variant="wave" />
       <Location />
-      <DaejeonPicks />
       <Information />
       <Gallery />
       <Rsvp />
+      <DaejeonPicks />
       <Guestbook />
       <Closing />
     </>

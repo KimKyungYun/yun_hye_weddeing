@@ -44,7 +44,7 @@ function MapCanvas() {
 }
 
 // 오시는 길의 카카오 지도. SDK 가 무거워 지도가 화면 근처에 왔을 때만 불러온다.
-// 키가 없으면 아무것도 그리지 않는다 (아래 약도가 대신한다).
+// 키가 없으면 아무것도 그리지 않는다 (아래 지도 앱 버튼이 남는다).
 export default function KakaoMap() {
   const ref = useRef<HTMLDivElement>(null);
   const [isNear, setIsNear] = useState(false);

@@ -136,10 +136,11 @@
 
     @include write-mask;
 
-    // 사진 픽셀 좌표 ÷ 사진 크기 (경윤 290,640 · 혜아 1000,762)
+    // 사진 픽셀 좌표 ÷ 사진 크기 (경윤은 오른쪽 끝 388,640 · 혜아는 왼쪽 끝 1000,762)
+    // 경윤은 글자 폭이 화면마다 달라도 화살표 시작점(398,676) 바로 앞에 붙도록 오른쪽 끝을 고정한다
     &--groom {
       top: 32%;
-      left: 21.9%;
+      right: 70.7%;
     }
 
     &--bride {
@@ -150,8 +151,8 @@
 
   &__date {
     position: absolute;
-    bottom: calc(5% + #{s.$safe-bottom});
-    left: 7%;
+    bottom: calc(8% + #{s.$safe-bottom});
+    left: 11%;
     margin: 0;
     font-family: var(--font-serif);
     font-size: 0.9375rem;

@@ -181,32 +181,4 @@
       fill: var(--map-ink);
     }
   }
-
-  // 주차안내: 주차장은 진하게, 걷는 길과 나머지 글자는 한 발 물러서게
-  &--parking {
-    .venue-map__parking rect {
-      fill: var(--map-parking-highlight);
-    }
-
-    .venue-map__label--parking {
-      font-weight: 700;
-      fill: var(--map-parking-highlight);
-    }
-
-    .venue-map__lot {
-      fill: var(--map-lot-highlight);
-      stroke: var(--map-parking-highlight);
-    }
-
-    .venue-map__route,
-    .venue-map__route-arrow,
-    .venue-map__walk,
-    .venue-map__bus--start {
-      opacity: 0.25;
-    }
-
-    .venue-map__label:not(.venue-map__label--parking, .venue-map__label--venue) {
-      opacity: 0.55;
-    }
-  }
 }

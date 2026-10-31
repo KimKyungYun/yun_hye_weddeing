@@ -13,15 +13,15 @@ export type TransportKind = 'bus' | 'train' | 'car';
 export interface TransportGuide {
   kind: TransportKind;
   title: string;
-  // [굵은 이름] 경로 설명 — 주소가 있으면 다음 줄에 (주소) 로 붙는다
-  items: { label: string; text: string; address?: string }[];
+  // [굵은 이름] 한 줄, 그 아래 설명. 설명 안의 줄바꿈은 그대로 보인다.
+  items: { label: string; text: string }[];
 }
 
 export const TRANSPORT: TransportGuide[] = [
   {
     kind: 'bus',
     title: '버스 이용 시',
-    items: [{ label: '대전복합터미널', text: '서관에서 동관으로 이동 후 앞쪽 횡단보도 횡단 (도보 5분)' }],
+    items: [{ label: '대전복합터미널', text: '동관에서 서관으로 이동 후 앞쪽 횡단보도 횡단\n(도보 5분)' }],
   },
   {
     kind: 'train',
@@ -35,23 +35,20 @@ export const TRANSPORT: TransportGuide[] = [
     kind: 'car',
     title: '자차 이용 시',
     items: [
-      {
-        label: '무료주차',
-        text: '씨엘드포레 본관 주차장 또는 건물 뒤편 주차 타워 (주차타워 5층과 웨딩홀 3층 연결)',
-        address: '대전 동구 동서대로 1700',
-      },
-      { label: '유료주차', text: '가양5구역 유료주차장', address: '대전 동구 가양동 449-27' },
+      { label: '무료주차', text: '씨엘드포레 본관 주차장 또는\n건물 뒤편 주차 타워\n(주차타워 5층과 웨딩홀 3층 연결)' },
+      // 449-27 사이의 ⁠(보이지 않는 글자)은 좁은 화면에서 번지가 "449-" / "27" 로 갈라지지 않게 붙잡아 둔다
+      { label: '유료주차', text: '가양5구역 유료주차장 (대전 동구 가양동 449-⁠27)' },
     ],
   },
 ];
 
-// 오시는 길 아래 "대전 맛집 리스트" — 신랑·신부가 고른 곳을 카카오맵 지도 하나에 모아 두었다
+// 참석 의사 아래 "대전 여행 리스트" — 신랑·신부가 고른 곳을 카카오맵 지도 하나에 모아 두었다
 export const DAEJEON_PICKS = {
-  title: '대전 맛집 리스트',
+  title: '대전 여행 리스트',
   // 휴대폰 폭(한 줄 약 18자)에 맞춰 줄을 나눴다
   message:
     '소중한 발걸음을 해주신 하객분들께\n감사한 마음을 담아,\n신랑 신부가 직접 추천하는\n대전의 명소들을 꾹꾹 눌러 담았습니다.\n대전에서의 시간이\n오래도록 즐거운 추억이 되기를 바랍니다.',
-  linkLabel: '신랑 신부의 대전 여행 지도 보기',
+  linkLabel: '신랑신부의 대전 여행 지도 보기',
   href: 'https://kko.to/8h_VZUyjXu',
 } as const;
 

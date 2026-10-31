@@ -52,8 +52,9 @@
     }
   }
 
+  // 문구 아래에 붙는 그림
   &__figure {
-    margin-bottom: s.$gap-7;
+    margin-top: s.$gap-7;
     overflow: hidden;
     border: 1px solid var(--border-subtle);
     border-radius: s.$shape-md;

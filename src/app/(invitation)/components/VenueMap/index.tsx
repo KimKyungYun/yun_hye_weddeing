@@ -1,11 +1,6 @@
 import { BusGlyph } from '../Icons';
 import styles from './VenueMap.module.scss';
 
-interface VenueMapProps {
-  // parking: 주차장 세 곳을 강조한다 (안내사항 › 주차안내)
-  highlight?: 'parking';
-}
-
 const cx = (...names: string[]) => names.map((name) => styles[name]).join(' ');
 
 // 좌표계: 카카오맵 실측 좌표(웨딩홀 기준, m)를 동서대로가 가로로 눕도록 26° 돌리고 1m = 3.6칸으로 옮겼다.
@@ -13,17 +8,20 @@ const cx = (...names: string[]) => names.map((name) => styles[name]).join(' ');
 // 위치를 바꿀 때는 주변 도로 폭(동서대로 100.8 · 북쪽 길 64.8 · 골목 28.8칸)을 함께 본다.
 
 // 도로 중심선과 폭. 테두리를 먼저 모두 그린 뒤 흰 길을 덮어 교차로가 매끄럽게 이어지게 한다.
+// 터미널 사이 길과 동서대로는 삼거리로 만난다 (남쪽으로 이어지는 길이 없다).
 const ROADS = [
   { name: '동서대로', d: 'M-20 746.8H1020', width: 100.8 },
   { name: '터미널 사이 길', d: 'M351.9 746.8L485.3 -20', width: 64.8 },
-  { name: '동서대로1690번길', d: 'M340.3 746.8L313.2 1460', width: 28.8 },
   { name: '계족로392번길', d: 'M-20 1001.2L1020 1110.4', width: 32.4 },
   { name: '웨딩홀 동쪽 길', d: 'M969.3 746.8L622 1460', width: 28.8 },
   { name: '주차장 서쪽 길', d: 'M666.2 1073.2L477.8 1460', width: 28.8 },
 ];
 
-// 동서대로를 건너는 횡단보도 (다이소 앞)
-const CROSSWALK_STRIPES = [702, 717, 732, 747, 762, 777];
+// 횡단보도 두 곳. 동관 쪽에서 동서대로를 바로 건너는 횡단보도는 없다.
+//  - 다이소 ↔ 서관: 터미널 사이 길을 건넌다 (길이 10° 기울어 줄무늬도 같이 기운다)
+//  - 서관 ↔ 씨엘드포레: 삼거리 서쪽에서 동서대로를 건넌다
+const CROSSWALK_SIDE_X = [338, 350, 362, 374, 386];
+const CROSSWALK_MAIN_Y = [702, 717, 732, 747, 762, 777];
 
 // 버스 정류 표시 — 24칸 버스 그림을 원 안에 넣는다
 function BusBadge({ x, y, start }: { x: number; y: number; start?: boolean }) {
@@ -46,13 +44,13 @@ function ParkingBadge({ x, y }: { x: number; y: number }) {
   );
 }
 
-export default function VenueMap({ highlight }: VenueMapProps) {
+export default function VenueMap() {
   return (
     <svg
-      className={`${styles['venue-map']} ${highlight === 'parking' ? styles['venue-map--parking'] : ''}`}
+      className={styles['venue-map']}
       viewBox="0 0 1000 1440"
       role="img"
-      aria-label="약도: 동서대로 북쪽에 대전복합터미널 서관(이마트)과 동관(하차장)이 있고, 길 건너 남쪽에 씨엘드포레 웨딩홀(호텔선샤인)이 있습니다. 터미널 하차장에서 다이소 앞 횡단보도를 건너면 도보 약 5분입니다. 주차는 웨딩홀 앞 본관 주차장, 건물 뒤편 주차타워, 남쪽 가양5구역 유료주차장을 이용할 수 있습니다."
+      aria-label="약도: 동서대로 북쪽에 대전복합터미널 서관(이마트)과 동관(하차장)이 있고, 길 건너 남쪽에 씨엘드포레 웨딩홀(호텔선샤인)이 있습니다. 동관 하차장에서 다이소 앞 횡단보도로 서관 쪽으로 건넌 뒤, 서관 앞 횡단보도로 동서대로를 건너면 도보 약 5분입니다. 주차는 웨딩홀 앞 본관 주차장, 건물 뒤편 주차타워, 남쪽 가양5구역 유료주차장을 이용할 수 있습니다."
     >
       <rect className={styles['venue-map__ground']} width="1000" height="1440" />
 
@@ -71,8 +69,13 @@ export default function VenueMap({ highlight }: VenueMapProps) {
       {ROADS.map((road) => (
         <path key={road.name} className={styles['venue-map__road']} d={road.d} strokeWidth={road.width} />
       ))}
-      {CROSSWALK_STRIPES.map((y) => (
-        <rect key={y} className={styles['venue-map__crosswalk']} x="393" y={y} width="36" height="8" rx="2" />
+      <g transform="rotate(9.9 366 665)">
+        {CROSSWALK_SIDE_X.map((x) => (
+          <rect key={x} className={styles['venue-map__crosswalk']} x={x} y="652" width="7" height="26" rx="2" />
+        ))}
+      </g>
+      {CROSSWALK_MAIN_Y.map((y) => (
+        <rect key={y} className={styles['venue-map__crosswalk']} x="282" y={y} width="36" height="8" rx="2" />
       ))}
       <text className={cx('venue-map__label', 'venue-map__label--road')} x="20" y="757">← 용전네거리</text>
       <text className={cx('venue-map__label', 'venue-map__label--road')} x="690" y="757" textAnchor="middle">동서대로</text>
@@ -89,8 +92,8 @@ export default function VenueMap({ highlight }: VenueMapProps) {
       <text className={cx('venue-map__label', 'venue-map__label--venue')} x="638" y="912">씨엘드포레</text>
       <text className={cx('venue-map__label', 'venue-map__label--sub')} x="638" y="952">호텔선샤인 7층</text>
 
-      {/* 하차장 → 다이소 앞 횡단보도 → 웨딩홀 입구 */}
-      <path className={styles['venue-map__route']} d="M508 72L400 682L411 698V806H516V842" />
+      {/* 동관 하차장 → 다이소 앞에서 서관 쪽으로 → 서관 앞에서 동서대로 건너기 → 웨딩홀 입구 */}
+      <path className={styles['venue-map__route']} d="M508 72L403.5 665H300V806H516V842" />
       <path className={styles['venue-map__route-arrow']} d="M502 836H530L516 856Z" />
       <g className={styles['venue-map__walk']} transform="translate(468 378)">
         <rect width="150" height="46" rx="23" />

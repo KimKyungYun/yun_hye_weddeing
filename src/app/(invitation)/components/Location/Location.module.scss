@@ -26,15 +26,6 @@
     color: var(--text-secondary);
   }
 
-  // 카카오 지도·지도 앱 버튼 아래의 약도
-  &__map {
-    margin-top: s.$gap-7;
-    overflow: hidden;
-    border: 1px solid var(--border-subtle);
-    border-radius: s.$shape-md;
-    box-shadow: var(--shadow-soft);
-  }
-
   &__transports {
     margin-top: s.$gap-9;
     text-align: left;
@@ -79,7 +70,10 @@
     font-weight: 500;
   }
 
+  // [이름] 은 한 줄을 차지하고, 설명 안의 줄바꿈은 그대로 보인다
   &__guide-text {
+    white-space: pre-line;
+    word-break: keep-all;
     color: var(--text-secondary);
 
     @include t.body-small;
@@ -87,13 +81,9 @@
     font-weight: 300;
 
     strong {
+      display: block;
       font-weight: 500;
       color: var(--text-primary);
     }
-  }
-
-  // 경로 설명 다음 줄의 (주소)
-  &__guide-address {
-    display: block;
   }
 }

@@ -4,10 +4,10 @@ import { DAEJEON_PICKS } from '@/constants/guide';
 import Section from '../Section';
 import styles from './DaejeonPicks.module.scss';
 
-// 오시는 길 아래, 신랑·신부가 추천하는 대전 맛집·명소. 목록은 카카오맵 지도 하나로 모아 두고 버튼으로 연다.
+// 참석 의사 아래, 신랑·신부가 추천하는 대전 명소. 목록은 카카오맵 지도 하나로 모아 두고 버튼으로 연다.
 export default function DaejeonPicks() {
   return (
-    <Section id="daejeon" eyebrow="RECOMMEND" title={DAEJEON_PICKS.title} className={styles['daejeon-picks']}>
+    <Section id="daejeon" eyebrow="TOUR GUIDE" title={DAEJEON_PICKS.title} className={styles['daejeon-picks']}>
       <div className={styles['daejeon-picks__card']} data-reveal="">
         {/* 접힌 지도 */}
         <svg

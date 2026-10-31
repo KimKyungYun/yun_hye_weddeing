@@ -7,7 +7,7 @@ import type { KeyboardEvent, ReactNode } from 'react';
 
 interface InfoTabsProps {
   tabs: InformationTab[];
-  // 탭 본문 위에 붙일 그림 (주차안내의 약도). 서버에서 그려 넘긴다.
+  // 탭 문구 아래에 붙일 그림 (주차안내의 약도). 서버에서 그려 넘긴다.
   figures?: Partial<Record<InformationKey, ReactNode>>;
 }
 
@@ -20,12 +20,12 @@ function TabPanel({ tab, figure, panelId, tabId, isActive }: {
 }) {
   return (
     <div id={panelId} className={styles['info-tabs__panel']} role="tabpanel" aria-labelledby={tabId} hidden={!isActive}>
-      {figure && <div className={styles['info-tabs__figure']}>{figure}</div>}
       {tab.paragraphs.map((paragraph) => (
         <p key={paragraph} className={styles['info-tabs__text']}>
           {paragraph}
         </p>
       ))}
+      {figure && <div className={styles['info-tabs__figure']}>{figure}</div>}
     </div>
   );
 }
