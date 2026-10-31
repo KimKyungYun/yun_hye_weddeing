@@ -91,4 +91,9 @@
       color: var(--text-primary);
     }
   }
+
+  // 경로 설명 다음 줄의 (주소)
+  &__guide-address {
+    display: block;
+  }
 }

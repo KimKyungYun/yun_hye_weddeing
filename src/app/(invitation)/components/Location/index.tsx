@@ -29,6 +29,7 @@ function TransportItem({ guide }: { guide: TransportGuide }) {
         {guide.items.map((item) => (
           <p key={item.label} className={styles['location__guide-text']}>
             <strong>[{item.label}]</strong> {item.text}
+            {item.address && <span className={styles['location__guide-address']}>({item.address})</span>}
           </p>
         ))}
       </div>

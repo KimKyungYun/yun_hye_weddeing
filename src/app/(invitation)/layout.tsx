@@ -5,6 +5,7 @@ import BgmToggle from './components/BgmToggle';
 import Curtain from './components/Curtain';
 import InvitationProvider from './components/InvitationProvider';
 import LeafCanvas from './components/LeafCanvas';
+import ScrollReset from './components/ScrollReset';
 import ScrollReveal from './components/ScrollReveal';
 import ToastProvider from './components/ToastProvider';
 import styles from './Invitation.module.scss';
@@ -22,6 +23,7 @@ export default function InvitationLayout({ children }: { children: ReactNode }) 
         <LeafCanvas />
         <BgmToggle />
         <main className={styles.invitation}>{children}</main>
+        <ScrollReset />
         <ScrollReveal />
       </ToastProvider>
     </InvitationProvider>

@@ -8,87 +8,126 @@ interface VenueMapProps {
 
 const cx = (...names: string[]) => names.map((name) => styles[name]).join(' ');
 
+// 좌표계: 카카오맵 실측 좌표(웨딩홀 기준, m)를 동서대로가 가로로 눕도록 26° 돌리고 1m = 3.6칸으로 옮겼다.
+// 그래서 북쪽은 위에서 왼쪽으로 26° 기운다(오른쪽 위 나침반). 글자가 길·건물과 겹치지 않게 자리를 잡았으니
+// 위치를 바꿀 때는 주변 도로 폭(동서대로 100.8 · 북쪽 길 64.8 · 골목 28.8칸)을 함께 본다.
+
+// 도로 중심선과 폭. 테두리를 먼저 모두 그린 뒤 흰 길을 덮어 교차로가 매끄럽게 이어지게 한다.
+const ROADS = [
+  { name: '동서대로', d: 'M-20 746.8H1020', width: 100.8 },
+  { name: '터미널 사이 길', d: 'M351.9 746.8L485.3 -20', width: 64.8 },
+  { name: '동서대로1690번길', d: 'M340.3 746.8L313.2 1460', width: 28.8 },
+  { name: '계족로392번길', d: 'M-20 1001.2L1020 1110.4', width: 32.4 },
+  { name: '웨딩홀 동쪽 길', d: 'M969.3 746.8L622 1460', width: 28.8 },
+  { name: '주차장 서쪽 길', d: 'M666.2 1073.2L477.8 1460', width: 28.8 },
+];
+
+// 동서대로를 건너는 횡단보도 (다이소 앞)
+const CROSSWALK_STRIPES = [702, 717, 732, 747, 762, 777];
+
+// 버스 정류 표시 — 24칸 버스 그림을 원 안에 넣는다
+function BusBadge({ x, y, start }: { x: number; y: number; start?: boolean }) {
+  return (
+    <g className={start ? cx('venue-map__bus', 'venue-map__bus--start') : styles['venue-map__bus']} transform={`translate(${x} ${y})`}>
+      <circle r="28" />
+      <g transform="translate(-19.2 -19.2) scale(1.6)">
+        <BusGlyph />
+      </g>
+    </g>
+  );
+}
+
 function ParkingBadge({ x, y }: { x: number; y: number }) {
   return (
     <g className={styles['venue-map__parking']} transform={`translate(${x} ${y})`}>
-      <rect width="50" height="50" rx="10" />
-      <text x="25" y="38" textAnchor="middle">P</text>
+      <rect width="40" height="40" rx="9" />
+      <text x="20" y="30" textAnchor="middle">P</text>
     </g>
   );
 }
 
-// 아이콘은 24칸 격자 그림을 ICON_SCALE 배로 키워 쓴다 (오시는 길의 교통 아이콘과 같은 그림)
-const ICON_SCALE = 3.3;
-
-function BusIcon({ x, y }: { x: number; y: number }) {
-  return (
-    <g className={styles['venue-map__icon']} transform={`translate(${x} ${y}) scale(${ICON_SCALE})`}>
-      <BusGlyph />
-    </g>
-  );
-}
-
-// 웨딩홀 주변 약도. 신랑·신부가 그린 도면(1218×1660)을 같은 좌표로 옮겨 템플릿 색으로 다듬었다.
-// 색은 모두 VenueMap.module.scss 가 CSS 변수로 칠한다.
 export default function VenueMap({ highlight }: VenueMapProps) {
   return (
     <svg
       className={`${styles['venue-map']} ${highlight === 'parking' ? styles['venue-map--parking'] : ''}`}
-      viewBox="0 0 1218 1660"
+      viewBox="0 0 1000 1440"
       role="img"
-      aria-label="약도: 큰길 북쪽에 대전복합터미널 동관(이마트)과 서관(하차지)이 있고, 큰길 남쪽에 씨엘드포레 웨딩홀이 있습니다. 본관 주차장, 건물 뒤편 주차 타워, 남쪽 가양5구역 유료주차장을 이용할 수 있습니다."
+      aria-label="약도: 동서대로 북쪽에 대전복합터미널 서관(이마트)과 동관(하차장)이 있고, 길 건너 남쪽에 씨엘드포레 웨딩홀(호텔선샤인)이 있습니다. 터미널 하차장에서 다이소 앞 횡단보도를 건너면 도보 약 5분입니다. 주차는 웨딩홀 앞 본관 주차장, 건물 뒤편 주차타워, 남쪽 가양5구역 유료주차장을 이용할 수 있습니다."
     >
-      <rect className={styles['venue-map__land']} width="1218" height="1660" />
+      <rect className={styles['venue-map__ground']} width="1000" height="1440" />
 
-      {/* 블록 */}
-      <rect className={styles['venue-map__block']} x="96" y="120" width="497" height="669" rx="16" />
-      <rect className={styles['venue-map__block']} x="668" y="24" width="235" height="580" rx="16" />
-      <polygon className={styles['venue-map__lot']} points="845,1246 1032,1246 878,1638 690,1638" />
-      <path className={styles['venue-map__venue']} d="M558 863 H827 V1035 H1028 V1189 H694 V1025 H558 Z" />
+      {/* 대전복합터미널 — 서관(큰길 쪽, 이마트) · 동관(북동쪽, 하차장 · CGV) */}
+      <path className={styles['venue-map__terminal']} d="M24 0H292L426 81L336 600H0V48Z" />
+      <path className={styles['venue-map__terminal']} d="M488 200L688 315L841 0H523Z" />
+
+      {/* 가양5구역 유료주차장 · 뒤편 주차타워 */}
+      <path className={styles['venue-map__lot']} d="M676.6 1099.5L769.3 1109.3L608.3 1440H511Z" />
+      <rect className={styles['venue-map__lot']} x="556" y="990" width="84" height="42" rx="6" />
 
       {/* 도로 */}
-      <rect className={styles['venue-map__road']} x="612" y="0" width="40" height="826" />
-      <rect className={styles['venue-map__road']} x="0" y="805" width="1218" height="42" />
-      <polygon className={styles['venue-map__road']} points="518,847 532,847 502,1222 488,1222" />
-      <rect className={styles['venue-map__road']} x="0" y="1219" width="1218" height="12" />
-      <polygon className={styles['venue-map__road']} points="818,1231 832,1231 652,1660 638,1660" />
-      <text className={styles['venue-map__road-label']} x="16" y="838">용전네거리 방면</text>
-      <text className={styles['venue-map__road-label']} x="1202" y="838" textAnchor="end">동부네거리 방면</text>
+      {ROADS.map((road) => (
+        <path key={`${road.name}-line`} className={styles['venue-map__road-line']} d={road.d} strokeWidth={road.width + 5} />
+      ))}
+      {ROADS.map((road) => (
+        <path key={road.name} className={styles['venue-map__road']} d={road.d} strokeWidth={road.width} />
+      ))}
+      {CROSSWALK_STRIPES.map((y) => (
+        <rect key={y} className={styles['venue-map__crosswalk']} x="393" y={y} width="36" height="8" rx="2" />
+      ))}
+      <text className={cx('venue-map__label', 'venue-map__label--road')} x="20" y="757">← 용전네거리</text>
+      <text className={cx('venue-map__label', 'venue-map__label--road')} x="690" y="757" textAnchor="middle">동서대로</text>
+      <text className={cx('venue-map__label', 'venue-map__label--road')} x="980" y="757" textAnchor="end">동부네거리 →</text>
+      <text className={cx('venue-map__label', 'venue-map__label--street')} x="44" y="1028" transform="rotate(6 44 1028)">계족로392번길</text>
 
-      {/* 대전복합터미널 동관 (이마트) */}
-      <BusIcon x={303} y={290} />
-      <text className={styles['venue-map__label']} x="343" y="420" textAnchor="middle">대전복합터미널</text>
-      <text className={styles['venue-map__label']} x="343" y="478" textAnchor="middle">동관</text>
-      <g className={styles['venue-map__icon']} transform={`translate(152 648) scale(${ICON_SCALE})`}>
+      {/* 웨딩홀 */}
+      <rect className={styles['venue-map__venue']} x="454" y="858" width="166" height="122" rx="10" />
+      <path
+        className={styles['venue-map__venue-heart']}
+        transform="translate(508.2 889.7) scale(2.4)"
+        d="M12 20.3S3 14.9 3 9.1C3 6.3 5.1 4.2 7.7 4.2c1.9 0 3.4 1 4.3 2.6.9-1.6 2.4-2.6 4.3-2.6 2.6 0 4.7 2.1 4.7 4.9 0 5.8-9 11.2-9 11.2z"
+      />
+      <text className={cx('venue-map__label', 'venue-map__label--venue')} x="638" y="912">씨엘드포레</text>
+      <text className={cx('venue-map__label', 'venue-map__label--sub')} x="638" y="952">호텔선샤인 7층</text>
+
+      {/* 하차장 → 다이소 앞 횡단보도 → 웨딩홀 입구 */}
+      <path className={styles['venue-map__route']} d="M508 72L400 682L411 698V806H516V842" />
+      <path className={styles['venue-map__route-arrow']} d="M502 836H530L516 856Z" />
+      <g className={styles['venue-map__walk']} transform="translate(468 378)">
+        <rect width="150" height="46" rx="23" />
+        <text x="75" y="32" textAnchor="middle">도보 약 5분</text>
+      </g>
+
+      {/* 터미널 */}
+      <BusBadge x={190} y={244} />
+      <text className={styles['venue-map__label']} x="190" y="330" textAnchor="middle">대전복합터미널</text>
+      <text className={cx('venue-map__label', 'venue-map__label--sub')} x="190" y="374" textAnchor="middle">서관 · 매표소</text>
+      <g className={styles['venue-map__mart']} transform="translate(58 440) scale(2)">
         <path d="M3 4.5h2.2l2.2 10.2c.1.5.5.8 1 .8h8.4c.5 0 .9-.3 1-.8L19.5 8H6" />
         <circle cx="9.5" cy="19" r="1.4" />
         <circle cx="16" cy="19" r="1.4" />
       </g>
-      <text className={styles['venue-map__label']} x="192" y="770" textAnchor="middle">이마트</text>
+      <text className={cx('venue-map__label', 'venue-map__label--sub')} x="82" y="530" textAnchor="middle">이마트</text>
 
-      {/* 대전복합터미널 서관 (하차지) — 이름이 블록보다 길어 도면처럼 오른쪽으로 넘친다 */}
-      <BusIcon x={746} y={236} />
-      <text className={styles['venue-map__label']} x="860" y="370" textAnchor="middle">대전복합터미널</text>
-      <text className={styles['venue-map__label']} x="860" y="428" textAnchor="middle">서관 (하차지)</text>
-
-      {/* 씨엘드포레 웨딩홀 — 목적지 하트 핀 (핀 끝이 건물 위에 닿는다) */}
-      <g className={styles['venue-map__pin']} transform="translate(727 967) scale(3.6)">
-        <path d="M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z" />
-        <path
-          className={styles['venue-map__pin-heart']}
-          d="M12 13.6c-2-1.2-2.9-2.2-2.9-3.2 0-.9.6-1.5 1.4-1.5.6 0 1.2.4 1.5.9.3-.5.9-.9 1.5-.9.8 0 1.4.6 1.4 1.5 0 1-.9 2-2.9 3.2z"
-        />
-      </g>
-      <text className={cx('venue-map__label', 'venue-map__label--venue')} x="822" y="1036">씨엘드포레</text>
+      <BusBadge x={550} y={46} start />
+      <text className={styles['venue-map__label']} x="634" y="168" textAnchor="middle">터미널 동관</text>
+      <text className={cx('venue-map__label', 'venue-map__label--sub')} x="626" y="208" textAnchor="middle">하차장 · CGV</text>
+      <text className={cx('venue-map__label', 'venue-map__label--landmark')} x="448" y="604">다이소</text>
 
       {/* 주차장 */}
-      <ParkingBadge x={763} y={880} />
-      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="822" y="920">본관 주차장</text>
-      <ParkingBadge x={790} y={1132} />
-      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="850" y="1172">뒤편 주차타워</text>
-      <ParkingBadge x={838} y={1410} />
-      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="862" y="1508" textAnchor="middle">가양5구역</text>
-      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="862" y="1562" textAnchor="middle">유료주차장</text>
+      <ParkingBadge x={590} y={814} />
+      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="642" y="846">본관 주차장</text>
+      <ParkingBadge x={580} y={991} />
+      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="548" y="1022" textAnchor="end">뒤편 주차타워</text>
+      <ParkingBadge x={636} y={1180} />
+      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="790" y="1198">가양5구역</text>
+      <text className={cx('venue-map__label', 'venue-map__label--parking')} x="790" y="1242">유료주차장</text>
+
+      {/* 나침반 — 지도를 돌렸으니 북쪽이 왼쪽으로 기운다. 오른쪽 위는 떠 있는 음악 버튼이 가려 왼쪽 아래에 둔다 */}
+      <g className={styles['venue-map__compass']} transform="translate(24 1370)">
+        <rect width="84" height="48" rx="24" />
+        <path transform="translate(28 24) rotate(-26)" d="M0 -16L7 10L0 5L-7 10Z" />
+        <text x="58" y="34" textAnchor="middle">N</text>
+      </g>
     </svg>
   );
 }

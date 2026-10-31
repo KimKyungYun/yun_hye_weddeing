@@ -1,78 +1,111 @@
+// 글자 크기는 viewBox(1000 폭) 단위 — 375px 화면에서 약 0.33배로 보인다 (34 → 11px)
 .venue-map {
   display: block;
   width: 100%;
   height: auto;
   font-family: var(--font-sans);
 
-  &__land {
-    fill: var(--map-land);
+  &__ground {
+    fill: var(--map-ground);
   }
 
-  &__block {
-    fill: var(--map-block);
-    stroke: var(--map-block-line);
-    stroke-width: 2;
+  &__terminal {
+    fill: var(--map-terminal);
   }
 
-  &__lot {
-    fill: var(--map-block);
-    stroke: var(--map-block-line);
-    stroke-width: 2;
+  &__road-line {
+    fill: none;
+    stroke: var(--map-road-line);
+  }
+
+  &__road {
+    fill: none;
+    stroke: var(--map-road);
+  }
+
+  &__crosswalk {
+    fill: var(--map-crosswalk);
   }
 
   &__venue {
     fill: var(--map-venue);
-    stroke: var(--map-venue-line);
-    stroke-width: 3;
   }
 
-  &__road {
-    fill: var(--map-road);
+  &__venue-heart {
+    fill: var(--map-venue-ink);
   }
 
-  // 글자 크기는 viewBox(1218 폭) 단위 — 375px 화면에서 약 0.27배로 보인다
-  &__road-label {
-    font-size: 34px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    fill: var(--map-road-label);
+  &__lot {
+    fill: var(--map-lot);
+    stroke: var(--map-parking);
+    stroke-width: 2;
+    stroke-dasharray: 8 6;
   }
 
-  // 24칸 격자 그림을 키워 쓰므로 선 굵기도 격자 단위다 (1.5 × 3.3배 ≈ 약도 단위 5)
-  &__icon {
+  // 걷는 길: 점선 + 끝의 화살촉 + "도보 약 5분" 알약
+  &__route {
     fill: none;
-    stroke: var(--map-ink);
+    stroke: var(--map-route);
+    stroke-width: 7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 0.1 15;
+  }
+
+  &__route-arrow {
+    fill: var(--map-route);
+  }
+
+  &__walk {
+    rect {
+      fill: var(--map-route);
+    }
+
+    text {
+      font-size: 28px;
+      font-weight: 700;
+      fill: var(--map-route-ink);
+    }
+  }
+
+  &__bus {
+    circle {
+      fill: var(--map-badge);
+      stroke: var(--map-ink);
+      stroke-width: 2.5;
+    }
+
+    g {
+      fill: none;
+      stroke: var(--map-ink);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    // 걷는 길이 시작하는 하차장
+    &--start {
+      circle {
+        fill: var(--map-route);
+        stroke: var(--map-route);
+      }
+
+      g {
+        stroke: var(--map-route-ink);
+      }
+    }
+  }
+
+  &__mart {
+    fill: none;
+    stroke: var(--map-ink-muted);
     stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
 
     circle {
-      fill: var(--map-ink);
+      fill: var(--map-ink-muted);
       stroke: none;
-    }
-  }
-
-  &__pin {
-    fill: var(--map-venue-line);
-  }
-
-  &__pin-heart {
-    fill: var(--map-block);
-  }
-
-  &__label {
-    font-size: 50px;
-    font-weight: 500;
-    fill: var(--map-ink);
-
-    &--venue {
-      font-size: 56px;
-      font-weight: 700;
-      fill: var(--map-venue-line);
-    }
-
-    &--parking {
-      font-size: 44px;
     }
   }
 
@@ -82,13 +115,74 @@
     }
 
     text {
-      font-size: 38px;
+      font-size: 28px;
       font-weight: 700;
       fill: var(--map-parking-ink);
     }
   }
 
-  // 주차안내: 주차장은 진하게, 나머지는 한 발 물러서게
+  &__label {
+    font-size: 40px;
+    font-weight: 600;
+    fill: var(--map-ink);
+
+    &--sub {
+      font-size: 32px;
+      font-weight: 500;
+      fill: var(--map-ink-muted);
+    }
+
+    &--venue {
+      font-size: 42px;
+      font-weight: 700;
+      fill: var(--map-venue);
+    }
+
+    &--parking {
+      font-size: 34px;
+      font-weight: 600;
+      fill: var(--map-parking);
+    }
+
+    &--landmark {
+      font-size: 30px;
+      font-weight: 500;
+      fill: var(--map-ink-muted);
+    }
+
+    &--road {
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      fill: var(--map-road-label);
+    }
+
+    &--street {
+      font-size: 24px;
+      font-weight: 500;
+      fill: var(--map-road-label);
+    }
+  }
+
+  &__compass {
+    rect {
+      fill: var(--map-badge);
+      stroke: var(--map-road-line);
+      stroke-width: 2;
+    }
+
+    path {
+      fill: var(--map-route);
+    }
+
+    text {
+      font-size: 26px;
+      font-weight: 700;
+      fill: var(--map-ink);
+    }
+  }
+
+  // 주차안내: 주차장은 진하게, 걷는 길과 나머지 글자는 한 발 물러서게
   &--parking {
     .venue-map__parking rect {
       fill: var(--map-parking-highlight);
@@ -101,10 +195,17 @@
 
     .venue-map__lot {
       fill: var(--map-lot-highlight);
+      stroke: var(--map-parking-highlight);
     }
 
-    .venue-map__icon,
-    .venue-map__label:not(.venue-map__label--parking) {
+    .venue-map__route,
+    .venue-map__route-arrow,
+    .venue-map__walk,
+    .venue-map__bus--start {
+      opacity: 0.25;
+    }
+
+    .venue-map__label:not(.venue-map__label--parking, .venue-map__label--venue) {
       opacity: 0.55;
     }
   }

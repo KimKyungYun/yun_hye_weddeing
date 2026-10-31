@@ -1,4 +1,5 @@
 import Closing from './components/Closing';
+import DaejeonPicks from './components/DaejeonPicks';
 import Gallery from './components/Gallery';
 import Greeting from './components/Greeting';
 import Guestbook from './components/Guestbook';
@@ -18,6 +19,7 @@ export default function InvitationPage() {
       <WeddingDate />
       <LeafDivider variant="wave" />
       <Location />
+      <DaejeonPicks />
       <Information />
       <Gallery />
       <Rsvp />

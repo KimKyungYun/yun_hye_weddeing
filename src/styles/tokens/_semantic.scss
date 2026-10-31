@@ -32,18 +32,25 @@
   --surface-photo-shade: rgb(30, 34, 26, 0.32);
 
   // ── 약도 ─────────────────────────────────────────────────
-  --map-land: #{p.$cream};
-  --map-block: #{p.$white};
-  --map-block-line: #{p.$line};
-  --map-venue: rgb(139, 158, 126, 0.22);
-  --map-venue-line: #{p.$forest};
-  --map-road: #{p.$ink-light};
-  --map-road-label: #{p.$white};
+  // 블록은 모래색, 길은 흰색 — 목적지(초록)·걷는 길(테라코타)·주차(슬레이트)만 색이 있다
+  --map-ground: #{p.$sand};
+  --map-terminal: #{p.$sage-pale};
+  --map-road: #{p.$white};
+  --map-road-line: #{p.$line-strong};
+  --map-road-label: #{p.$ink-muted};
+  --map-crosswalk: #{p.$line-strong};
   --map-ink: #{p.$ink};
-  --map-parking: #{p.$forest};
+  --map-ink-muted: #{p.$ink-light};
+  --map-badge: #{p.$white};
+  --map-venue: #{p.$forest};
+  --map-venue-ink: #{p.$white};
+  --map-route: #{p.$terracotta};
+  --map-route-ink: #{p.$white};
+  --map-parking: #{p.$slate};
   --map-parking-ink: #{p.$white};
+  --map-lot: rgb(91, 110, 133, 0.16);
   --map-parking-highlight: #{p.$terracotta};
-  --map-lot-highlight: rgb(184, 103, 58, 0.14);
+  --map-lot-highlight: rgb(184, 103, 58, 0.18);
 
   // ── 카카오톡 공유 ────────────────────────────────────────
   --kakao-bg: #{p.$kakao-yellow};

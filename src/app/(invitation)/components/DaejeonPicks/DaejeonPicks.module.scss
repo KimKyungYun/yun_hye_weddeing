@@ -1,0 +1,48 @@
+@use "styles/patterns/button";
+@use "styles/tokens/spacing" as s;
+
+.daejeon-picks {
+  background:
+    radial-gradient(ellipse 260px 200px at 85% 30%, var(--accent-glow) 0%, transparent 70%),
+    var(--surface-page);
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: s.$gap-6;
+    padding: s.$gap-9 s.$gap-5;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-lg;
+    background-color: var(--surface-card);
+  }
+
+  &__icon {
+    color: var(--accent);
+  }
+
+  // 문구의 줄바꿈은 그대로 두고, 좁은 화면에서 더 꺾일 때는 낱말 단위로 꺾는다
+  &__message {
+    white-space: pre-line;
+    word-break: keep-all;
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+  }
+
+  // 문구가 길어 카드 폭을 다 쓰고, 한 줄로 둔다
+  &__link {
+    @include button.pill;
+
+    width: 100%;
+    padding-inline: s.$gap-4;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  &__link-icon {
+    width: auto;
+    height: 20px;
+  }
+}
