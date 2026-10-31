@@ -1,0 +1,72 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.summary {
+  display: grid;
+  gap: s.$gap-4;
+
+  @include media.tablet-up {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-3;
+    padding: s.$gap-6;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-md;
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-card);
+
+    &--total {
+      color: var(--text-on-inverse);
+      border-color: var(--action-primary);
+      background-color: var(--action-primary);
+
+      .summary__label,
+      .summary__facts {
+        color: var(--text-on-inverse-muted);
+      }
+    }
+  }
+
+  &__label {
+    color: var(--text-tertiary);
+
+    @include t.label-small;
+  }
+
+  &__guests {
+    @include t.label-medium;
+  }
+
+  &__number {
+    margin-right: s.$gap-1;
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.1;
+
+    @include t.numeric;
+  }
+
+  &__facts {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-1;
+    color: var(--text-secondary);
+
+    @include t.caption;
+  }
+
+  &__fact {
+    display: flex;
+    gap: s.$gap-3;
+
+    dt {
+      min-width: 2.5em;
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,10 @@
+@use "styles/patterns/button";
+@use "styles/tokens/spacing" as s;
+
+.rsvp-dialog {
+  margin-top: s.$gap-7;
+
+  &__trigger {
+    @include button.pill;
+  }
+}

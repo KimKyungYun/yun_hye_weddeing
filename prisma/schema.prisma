@@ -1,0 +1,59 @@
+// 윤·혜 모바일 청첩장 — 데이터 모델
+//
+// Supabase Postgres 위에서 Prisma 가 스키마·마이그레이션·조회를 맡는다.
+// 관리자 로그인(Auth)만 Supabase 가 맡는다. 청첩장 본문은 src/constants/wedding.ts 에 있다.
+//
+// Prisma 로 표현할 수 없는 것(CHECK 제약, RLS)은 migration.sql 에서 보강한다.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// 신랑측 · 신부측
+enum Side {
+  GROOM @map("groom")
+  BRIDE @map("bride")
+
+  @@map("side")
+}
+
+enum MealPlan {
+  YES       @map("yes")
+  NO        @map("no")
+  UNDECIDED @map("undecided")
+
+  @@map("meal_plan")
+}
+
+// 방명록. 하객은 쓰기만 하고, 목록은 관리자 화면에서만 본다.
+model GuestbookEntry {
+  id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name      String   @db.VarChar(20)
+  message   String   @db.VarChar(500)
+  createdAt DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([createdAt(sort: Desc)])
+  @@map("guestbook_entries")
+}
+
+// 참석 의사. 공개 화면에는 내보내지 않고 관리자만 본다.
+model Rsvp {
+  id        String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  side      Side
+  name      String    @db.VarChar(20)
+  attending Boolean
+  // 본인 포함 인원. 불참이면 0 (CHECK 제약은 migration.sql)
+  headcount Int       @default(1)
+  // 불참이면 null
+  meal      MealPlan?
+  message   String?   @db.VarChar(200)
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  @@index([side, createdAt])
+  @@map("rsvps")
+}

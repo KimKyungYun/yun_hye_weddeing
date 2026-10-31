@@ -1,0 +1,78 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.info-tabs {
+  text-align: center;
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid var(--border-default);
+    border-bottom: 0;
+    border-radius: s.$shape-lg s.$shape-lg 0 0;
+    overflow: hidden;
+    background-color: var(--surface-page);
+  }
+
+  &__tab {
+    position: relative;
+    padding: s.$gap-4 0;
+    color: var(--text-tertiary);
+    transition: color 0.2s ease, background-color 0.2s ease;
+
+    @include t.label-medium;
+
+    // 탭 사이 가는 세로선
+    & + & {
+      border-left: 1px solid var(--border-default);
+    }
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &--active {
+      font-weight: 500;
+      color: var(--text-brand);
+      background-color: var(--surface-card);
+    }
+  }
+
+  &__panel {
+    padding: s.$gap-8 s.$gap-5;
+    border: 1px solid var(--border-default);
+    border-top: 0;
+    border-radius: 0 0 s.$shape-lg s.$shape-lg;
+    background-color: var(--surface-card);
+
+    // 첫 문단이 아닌 문단 사이 간격
+    p + p {
+      margin-top: s.$gap-5;
+    }
+  }
+
+  &__figure {
+    margin-bottom: s.$gap-7;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-md;
+  }
+
+  &__text {
+    white-space: pre-line;
+    color: var(--text-secondary);
+
+    @include t.lead;
+
+    font-family: var(--font-serif);
+
+    // 줄바꿈을 직접 넣은 문구라 375px 폭에서도 한 줄이 넘치지 않는 크기로 둔다
+    font-size: 0.8125rem;
+    line-height: 1.9;
+
+    @include media.tablet-up {
+      font-size: 0.875rem;
+    }
+  }
+}

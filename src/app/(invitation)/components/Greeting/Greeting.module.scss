@@ -1,0 +1,44 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.greeting {
+  background:
+    radial-gradient(ellipse 300px 200px at 10% 20%, var(--accent-glow) 0%, transparent 70%),
+    radial-gradient(ellipse 250px 180px at 90% 80%, var(--accent-tint) 0%, transparent 70%),
+    var(--surface-page);
+
+  &__text {
+    margin-bottom: s.$gap-11;
+    color: var(--text-secondary);
+
+    @include t.prose;
+  }
+
+  &__family {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-4;
+  }
+
+  &__row {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: s.$gap-3;
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    color: var(--text-primary);
+  }
+
+  &__relation {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  &__child {
+    font-weight: 500;
+    color: var(--text-brand);
+  }
+}

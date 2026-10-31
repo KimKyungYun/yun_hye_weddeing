@@ -1,0 +1,113 @@
+.venue-map {
+  display: block;
+  width: 100%;
+  height: auto;
+  font-family: var(--font-sans);
+
+  &__land {
+    fill: var(--map-land);
+  }
+
+  &__block {
+    fill: var(--map-block);
+    stroke: var(--map-block-line);
+    stroke-width: 2;
+  }
+
+  &__lot {
+    fill: var(--map-block);
+    stroke: var(--map-block-line);
+    stroke-width: 2;
+  }
+
+  &__venue {
+    fill: var(--map-venue);
+    stroke: var(--map-venue-line);
+    stroke-width: 3;
+  }
+
+  &__road {
+    fill: var(--map-road);
+  }
+
+  // 글자 크기는 viewBox(1218 폭) 단위 — 375px 화면에서 약 0.27배로 보인다
+  &__road-label {
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    fill: var(--map-road-label);
+  }
+
+  &__icon {
+    fill: none;
+    stroke: var(--map-ink);
+    stroke-width: 4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+    circle {
+      fill: var(--map-ink);
+      stroke: none;
+    }
+  }
+
+  &__rings {
+    fill: none;
+    stroke: var(--map-venue-line);
+    stroke-width: 5;
+
+    path {
+      fill: var(--map-venue-line);
+      stroke: none;
+    }
+  }
+
+  &__label {
+    font-size: 50px;
+    font-weight: 500;
+    fill: var(--map-ink);
+
+    &--venue {
+      font-size: 56px;
+      font-weight: 700;
+      fill: var(--map-venue-line);
+    }
+
+    &--parking {
+      font-size: 44px;
+    }
+  }
+
+  &__parking {
+    rect {
+      fill: var(--map-parking);
+    }
+
+    text {
+      font-size: 38px;
+      font-weight: 700;
+      fill: var(--map-parking-ink);
+    }
+  }
+
+  // 주차안내: 주차장은 진하게, 나머지는 한 발 물러서게
+  &--parking {
+    .venue-map__parking rect {
+      fill: var(--map-parking-highlight);
+    }
+
+    .venue-map__label--parking {
+      font-weight: 700;
+      fill: var(--map-parking-highlight);
+    }
+
+    .venue-map__lot {
+      fill: var(--map-lot-highlight);
+    }
+
+    .venue-map__icon,
+    .venue-map__label:not(.venue-map__label--parking) {
+      opacity: 0.55;
+    }
+  }
+}

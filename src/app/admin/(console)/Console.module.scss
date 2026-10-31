@@ -1,0 +1,19 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/utils/media" as media;
+
+.console {
+  min-height: 100dvh;
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-8;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: s.$gap-7 s.$gap-5 s.$gap-11;
+
+    @include media.tablet-up {
+      padding: s.$gap-9 s.$gap-8 s.$gap-12;
+    }
+  }
+}

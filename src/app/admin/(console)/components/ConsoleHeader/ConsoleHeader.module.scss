@@ -1,0 +1,101 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid var(--border-default);
+  background-color: var(--surface-card);
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: s.$gap-4;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: s.$gap-4 s.$gap-5;
+
+    @include media.tablet-up {
+      padding: s.$gap-4 s.$gap-8;
+    }
+  }
+
+  &__title {
+    font-family: var(--font-serif);
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-brand);
+  }
+
+  &__account {
+    display: flex;
+    align-items: center;
+    gap: s.$gap-4;
+    min-width: 0;
+  }
+
+  &__email {
+    overflow: hidden;
+    color: var(--text-tertiary);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    @include t.caption;
+
+    // 좁은 화면에서는 로그아웃 버튼 자리를 남긴다
+    @media (width < 420px) {
+      display: none;
+    }
+  }
+
+  &__logout {
+    padding: s.$gap-2 s.$gap-4;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-full;
+    color: var(--text-secondary);
+    white-space: nowrap;
+
+    @include t.caption;
+
+    &:hover {
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+  }
+
+  &__nav {
+    display: flex;
+    gap: s.$gap-2;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 s.$gap-3;
+    overflow-x: auto;
+
+    @include media.tablet-up {
+      padding: 0 s.$gap-6;
+    }
+  }
+
+  &__link {
+    padding: s.$gap-4 s.$gap-4;
+    border-bottom: 2px solid transparent;
+    color: var(--text-secondary);
+    white-space: nowrap;
+
+    @include t.label-medium;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+
+    &--active {
+      font-weight: 500;
+      color: var(--text-brand);
+      border-bottom-color: var(--action-primary);
+    }
+  }
+}

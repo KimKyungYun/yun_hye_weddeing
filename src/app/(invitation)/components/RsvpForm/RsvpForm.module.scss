@@ -1,0 +1,8 @@
+@use "styles/tokens/spacing" as s;
+
+.rsvp-form {
+  display: flex;
+  flex-direction: column;
+  gap: s.$gap-6;
+  text-align: left;
+}

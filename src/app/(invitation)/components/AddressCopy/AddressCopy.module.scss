@@ -1,0 +1,10 @@
+@use "styles/patterns/button";
+@use "styles/tokens/spacing" as s;
+
+.address-copy {
+  margin-bottom: s.$gap-9;
+
+  &__button {
+    @include button.text;
+  }
+}

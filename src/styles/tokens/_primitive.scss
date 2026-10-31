@@ -1,0 +1,37 @@
+// Primitive Tokens — 원색 팔레트 (템플릿 nature-green 의 색 그대로)
+//
+// 크림·웜화이트 바탕에 세이지와 포레스트 그린, 갈색은 아주 가끔.
+// 컴포넌트에서 직접 쓰지 않는다. _semantic.scss 가 의미를 붙여 내보낸다.
+
+// 바탕
+$white: #ffffff;
+$warm-white: #fafaf5;
+$cream: #f5f2e8;
+
+// 초록
+$sage-lighter: #c5d2bc;
+$sage: #8b9e7e;
+$forest-mid: #5a6e4b;
+$forest: #4a5e3b;
+$forest-dark: #3a4b2e;
+
+// 잉크 (올리브빛이 도는 회갈색)
+$ink: #3d3d32;
+$ink-light: #6b6b5e;
+$ink-muted: #9a9a8a;
+
+// 선
+$line: #ddd8cc;
+$line-strong: #ccc7b8;
+
+// 달력 일요일
+$sunday: #c97070;
+
+// 상태
+$danger: #b3543f;
+
+// 인트로 손글씨 (레퍼런스 영상의 노랑)
+$intro-yellow: #f8d14a;
+
+// 약도 주차장 강조
+$terracotta: #b8673a;

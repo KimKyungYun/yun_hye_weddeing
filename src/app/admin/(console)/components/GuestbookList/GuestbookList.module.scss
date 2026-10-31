@@ -1,0 +1,52 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.guestbook-list {
+  display: flex;
+  flex-direction: column;
+  gap: s.$gap-3;
+
+  &__card {
+    padding: s.$gap-5;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-md;
+    background-color: var(--surface-card);
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: s.$gap-3;
+    margin-bottom: s.$gap-2;
+  }
+
+  &__name {
+    color: var(--text-brand);
+
+    @include t.label-medium;
+
+    font-weight: 500;
+  }
+
+  &__date {
+    flex: 1;
+    color: var(--text-tertiary);
+
+    @include t.caption;
+  }
+
+  &__message {
+    color: var(--text-secondary);
+    white-space: pre-line;
+
+    @include t.body-small;
+  }
+
+  &__empty {
+    padding: s.$gap-8 0;
+    text-align: center;
+    color: var(--text-tertiary);
+
+    @include t.body-small;
+  }
+}

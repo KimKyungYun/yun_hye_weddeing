@@ -1,0 +1,19 @@
+@use "styles/tokens/typography" as t;
+
+.message {
+  min-height: 1.5em;
+
+  @include t.label-medium;
+
+  &:empty {
+    display: none;
+  }
+
+  &--error {
+    color: var(--status-danger);
+  }
+
+  &--success {
+    color: var(--status-success);
+  }
+}

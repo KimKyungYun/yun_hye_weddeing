@@ -1,0 +1,31 @@
+// 반응형 — 모바일 우선 (템플릿 기준)
+//   Mobile  : 767px 이하 (기본 스타일)
+//   Tablet  : 768px 이상 — 여백·글자를 키운다
+//   Desktop : 1024px 이상 — 480px 가운데 칼럼
+
+$bp-tablet: 768px;
+$bp-desktop: 1024px;
+
+@mixin tablet-up {
+  @media (width >= $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (width >= $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+@mixin print {
+  @media print {
+    @content;
+  }
+}

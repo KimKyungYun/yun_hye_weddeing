@@ -1,0 +1,94 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.location {
+  background:
+    radial-gradient(ellipse 300px 200px at 80% 20%, var(--accent-tint) 0%, transparent 70%),
+    var(--surface-page);
+
+  &__info {
+    margin-bottom: s.$gap-3;
+  }
+
+  &__venue {
+    margin-bottom: s.$gap-2;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: var(--text-brand);
+  }
+
+  &__address {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  // 카카오 지도·지도 앱 버튼 아래의 약도
+  &__map {
+    margin-top: s.$gap-7;
+    overflow: hidden;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-md;
+    box-shadow: var(--shadow-soft);
+  }
+
+  &__transports {
+    margin-top: s.$gap-9;
+    text-align: left;
+  }
+
+  &__transport {
+    display: flex;
+    gap: s.$gap-5;
+    padding: s.$gap-6 0;
+    border-top: 1px solid var(--border-default);
+
+    &:last-child {
+      border-bottom: 1px solid var(--border-default);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: var(--text-brand);
+    background-color: var(--accent-tint-strong);
+  }
+
+  &__guide {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-2;
+    min-width: 0;
+  }
+
+  &__guide-title {
+    margin: 0;
+    color: var(--text-primary);
+
+    @include t.label-medium;
+
+    font-weight: 500;
+  }
+
+  &__guide-text {
+    color: var(--text-secondary);
+
+    @include t.body-small;
+
+    font-weight: 300;
+
+    strong {
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+  }
+}

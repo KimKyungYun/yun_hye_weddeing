@@ -1,0 +1,31 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.filter {
+  display: flex;
+  gap: s.$gap-3;
+
+  &__link {
+    padding: s.$gap-3 s.$gap-5;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-full;
+    color: var(--text-secondary);
+    background-color: var(--surface-card);
+
+    @include t.label-small;
+
+    &:hover {
+      border-color: var(--accent);
+    }
+
+    &--active {
+      color: var(--action-on-primary);
+      border-color: var(--action-primary);
+      background-color: var(--action-primary);
+
+      &:hover {
+        border-color: var(--action-primary);
+      }
+    }
+  }
+}

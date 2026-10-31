@@ -1,0 +1,44 @@
+@use "styles/patterns/button";
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.guestbook-writer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: s.$gap-3;
+    width: 100%;
+    padding: s.$gap-9 s.$gap-6;
+    border-radius: s.$shape-lg;
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-card);
+  }
+
+  &__icon {
+    margin-bottom: s.$gap-2;
+    color: var(--text-tertiary);
+  }
+
+  &__text {
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    color: var(--text-secondary);
+  }
+
+  &__note {
+    color: var(--text-tertiary);
+
+    @include t.caption;
+  }
+
+  &__button {
+    margin-top: s.$gap-7;
+
+    @include button.pill;
+  }
+}

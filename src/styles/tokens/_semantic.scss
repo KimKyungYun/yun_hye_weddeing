@@ -1,0 +1,102 @@
+// Semantic Tokens (CSS Custom Properties)
+//
+// 컴포넌트는 반드시 var(--*) 로만 색을 참조한다. stylelint 가 color · background-color ·
+// border-color 의 hex/rgb 직접 사용을 막는다.
+//
+// 청첩장 분위기를 지키려고 라이트 단일 테마로 둔다(다크 블록 없음).
+
+@use "./primitive" as p;
+
+:root {
+  color-scheme: light;
+
+  // ── Font (next/font 가 --font-noto-* 를 html 에 단다) ─────
+  --font-serif: var(--font-noto-serif-kr), georgia, serif;
+  --font-sans: var(--font-noto-sans-kr), "Apple SD Gothic Neo", sans-serif;
+
+  // ── Surface ──────────────────────────────────────────────
+  --surface-page: #{p.$warm-white};
+  --surface-warm: #{p.$cream};
+  --surface-card: #{p.$white};
+  // 사진이 뜨기 전 히어로 바탕 · 커튼
+  --surface-inverse: #{p.$forest-dark};
+  --surface-inverse-mid: #{p.$forest};
+  --surface-inverse-light: #{p.$forest-mid};
+  --surface-photo-viewer: rgb(0, 0, 0, 0.95);
+  --surface-backdrop: rgb(58, 64, 50, 0.6);
+  --surface-toast: rgb(74, 94, 59, 0.92);
+  // 사진 위 떠 있는 버튼(BGM)
+  --surface-glass: rgb(0, 0, 0, 0.28);
+  --surface-glass-strong: rgb(0, 0, 0, 0.42);
+  // 마무리 사진을 고르게 눌러 가운데 흰 글씨를 띄우는 그늘
+  --surface-photo-shade: rgb(30, 34, 26, 0.32);
+
+  // ── 약도 ─────────────────────────────────────────────────
+  --map-land: #{p.$cream};
+  --map-block: #{p.$white};
+  --map-block-line: #{p.$line};
+  --map-venue: rgb(139, 158, 126, 0.22);
+  --map-venue-line: #{p.$forest};
+  --map-road: #{p.$ink-light};
+  --map-road-label: #{p.$white};
+  --map-ink: #{p.$ink};
+  --map-parking: #{p.$forest};
+  --map-parking-ink: #{p.$white};
+  --map-parking-highlight: #{p.$terracotta};
+  --map-lot-highlight: rgb(184, 103, 58, 0.14);
+
+  // ── 인트로 (배너 손글씨) ─────────────────────────────────
+  // 레퍼런스 영상의 노란 손글씨
+  --intro-ink: #{p.$intro-yellow};
+  --intro-ink-shadow: rgb(0, 0, 0, 0.35);
+  // 위·아래를 살짝 눌러 하늘·잔디 위에서도 글씨가 읽히게 한다
+  --intro-shade: rgb(20, 24, 16, 0.24);
+  --intro-shade-soft: rgb(20, 24, 16, 0.32);
+
+  // ── Text ─────────────────────────────────────────────────
+  --text-primary: #{p.$ink};
+  --text-secondary: #{p.$ink-light};
+  --text-tertiary: #{p.$ink-muted};
+  --text-brand: #{p.$forest};
+  --text-on-inverse: #{p.$white};
+  --text-on-inverse-muted: rgb(255, 255, 255, 0.7);
+
+  // ── Accent (세이지) ──────────────────────────────────────
+  --accent: #{p.$sage};
+  --accent-glow: rgb(139, 158, 126, 0.08);
+  --accent-glow-soft: rgb(139, 158, 126, 0.05);
+  --accent-tint: rgb(139, 158, 126, 0.06);
+  --accent-tint-strong: rgb(139, 158, 126, 0.15);
+  --selection: #{p.$sage-lighter};
+  // 폼 칸 포커스 고리
+  --brand-tint: rgb(139, 158, 126, 0.2);
+
+  // ── Action ───────────────────────────────────────────────
+  --action-primary: #{p.$forest};
+  --action-primary-hover: #{p.$forest-dark};
+  --action-on-primary: #{p.$white};
+
+
+  // ── 달력 ─────────────────────────────────────────────────
+  --calendar-sunday: #{p.$sunday};
+
+  // ── Border ───────────────────────────────────────────────
+  --border-default: #{p.$line};
+  --border-subtle: rgb(139, 158, 126, 0.15);
+  --border-accent: rgb(139, 158, 126, 0.3);
+  --border-strong: #{p.$line-strong};
+  --border-focus: #{p.$forest};
+  --border-on-inverse: rgb(255, 255, 255, 0.4);
+  --border-on-inverse-strong: rgb(255, 255, 255, 0.7);
+
+  // ── Status ───────────────────────────────────────────────
+  --status-danger: #{p.$danger};
+  --status-danger-tint: rgb(179, 84, 63, 0.1);
+  --status-success: #{p.$forest};
+
+  // ── Elevation ────────────────────────────────────────────
+  --shadow-soft: 0 4px 20px rgb(74, 94, 59, 0.1);
+  --shadow-card: 0 2px 20px rgb(74, 94, 59, 0.06);
+  --shadow-column: 0 0 60px rgb(74, 94, 59, 0.08);
+  --shadow-raised: 0 18px 48px rgb(40, 50, 32, 0.18);
+}

@@ -1,0 +1,27 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.toast {
+  position: fixed;
+  bottom: calc(#{s.$gap-8} + #{s.$safe-bottom});
+  left: 50%;
+  z-index: s.$z-toast;
+  padding: s.$gap-4 s.$gap-7;
+  border-radius: s.$shape-full;
+  color: var(--text-on-inverse);
+  background-color: var(--surface-toast);
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 20px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+
+  @include t.label-small;
+
+  &--visible {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}

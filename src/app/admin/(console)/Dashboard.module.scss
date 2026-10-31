@@ -1,0 +1,27 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.dashboard {
+  &__section {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-4;
+  }
+
+  &__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: s.$gap-4;
+  }
+
+  &__more {
+    color: var(--text-brand);
+
+    @include t.label-small;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

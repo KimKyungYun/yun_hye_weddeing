@@ -1,0 +1,44 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/utils/media" as media;
+
+.bgm-toggle {
+  position: fixed;
+  top: calc(#{s.$gap-4} + #{s.$safe-top});
+
+  // 데스크톱에서는 가운데 칼럼의 오른쪽 위에 붙는다
+  right: max(#{s.$gap-4}, calc((100vw - #{s.$column-max}) / 2 + #{s.$gap-4}));
+  z-index: s.$z-leaves + 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: s.$shape-full;
+  color: var(--text-on-inverse);
+  background-color: var(--surface-glass);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--surface-glass-strong);
+  }
+
+  // 재생 중에는 은은하게 숨 쉬듯 커졌다 작아진다
+  &--playing {
+    animation: bgm-pulse 2.4s ease-in-out infinite;
+
+    @include media.reduced-motion {
+      animation: none;
+    }
+  }
+
+  @include media.print {
+    display: none;
+  }
+}
+
+@keyframes bgm-pulse {
+  50% {
+    transform: scale(1.06);
+  }
+}

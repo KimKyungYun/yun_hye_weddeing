@@ -1,0 +1,15 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/utils/media" as media;
+
+.invitation {
+  max-width: 100%;
+  overflow: hidden;
+
+  // 넓은 화면에서도 휴대폰으로 보는 것처럼 가운데 칼럼 하나로 보인다
+  @include media.desktop-up {
+    max-width: s.$column-max;
+    min-height: 100vh;
+    margin: 0 auto;
+    box-shadow: var(--shadow-column);
+  }
+}

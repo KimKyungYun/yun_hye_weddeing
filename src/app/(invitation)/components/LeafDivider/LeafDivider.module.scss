@@ -1,0 +1,34 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/utils/media" as media;
+
+.leaf-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: s.$gap-5 0;
+
+  @include media.print {
+    display: none;
+  }
+
+  &--wave {
+    background: linear-gradient(180deg, var(--surface-page) 0%, var(--surface-warm) 50%, var(--surface-page) 100%);
+  }
+
+  &--line {
+    background: linear-gradient(180deg, var(--surface-warm) 0%, var(--surface-page) 50%, var(--surface-warm) 100%);
+  }
+
+  &__art {
+    width: 120px;
+    height: auto;
+
+    @include media.tablet-up {
+      width: 160px;
+    }
+
+    @include media.desktop-up {
+      width: 180px;
+    }
+  }
+}

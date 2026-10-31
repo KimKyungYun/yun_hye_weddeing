@@ -1,0 +1,11 @@
+@use "styles/tokens/spacing" as s;
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: s.$gap-6;
+
+  button[type="submit"] {
+    min-height: 50px;
+  }
+}

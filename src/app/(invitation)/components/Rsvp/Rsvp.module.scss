@@ -1,0 +1,54 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.rsvp {
+  padding: s.$gap-12 s.$gap-7;
+  background-color: var(--surface-page);
+
+  &__card {
+    position: relative;
+    max-width: s.$inner-max;
+    margin: 0 auto;
+    padding: s.$gap-10 s.$gap-6 s.$gap-8;
+    text-align: center;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-lg;
+    background-color: var(--surface-card);
+
+    @include media.desktop-up {
+      max-width: s.$inner-max-desktop;
+    }
+  }
+
+  // 카드 위 테두리에 걸쳐 있는 알약 라벨
+  &__label {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    margin: 0;
+    padding: s.$gap-2 s.$gap-7;
+    border-radius: s.$shape-full;
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    background-color: var(--surface-warm);
+    transform: translate(-50%, -50%);
+  }
+
+  &__text {
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    line-height: 1.9;
+    color: var(--text-secondary);
+  }
+
+  &__dash {
+    display: block;
+    margin: s.$gap-3 0;
+    color: var(--text-tertiary);
+
+    @include t.caption;
+  }
+}

@@ -1,0 +1,60 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: s.$gap-3;
+
+  input:not([type="checkbox"], [type="file"]),
+  textarea,
+  select {
+    width: 100%;
+    min-height: 46px;
+    padding: s.$gap-4 s.$gap-5;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-md;
+    color: var(--text-primary);
+    background-color: var(--surface-card);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+    @include t.body-medium;
+
+    &:focus {
+      outline: none;
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px var(--brand-tint);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    line-height: 1.7;
+  }
+
+  &--invalid {
+    input:not([type="checkbox"], [type="file"]),
+    textarea,
+    select {
+      border-color: var(--status-danger);
+    }
+  }
+
+  &__label {
+    color: var(--text-primary);
+
+    @include t.label-medium;
+  }
+
+  &__hint {
+    color: var(--text-tertiary);
+
+    @include t.label-small;
+  }
+
+  &__error {
+    color: var(--status-danger);
+
+    @include t.label-small;
+  }
+}

@@ -1,0 +1,43 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.section {
+  position: relative;
+  padding: s.$gap-12 0;
+
+  &__inner {
+    max-width: s.$inner-max;
+    margin: 0 auto;
+    padding: 0 s.$gap-7;
+    text-align: center;
+
+    @include media.tablet-up {
+      max-width: s.$inner-max-tablet;
+      padding: 0 s.$gap-9;
+    }
+
+    @include media.desktop-up {
+      max-width: s.$inner-max-desktop;
+    }
+  }
+
+  &__heading {
+    margin-bottom: s.$gap-9;
+  }
+
+  &__eyebrow {
+    margin-bottom: s.$gap-3;
+    font-family: var(--font-serif);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 4px;
+    color: var(--accent);
+  }
+
+  &__title {
+    color: var(--text-brand);
+
+    @include t.section-title;
+  }
+}

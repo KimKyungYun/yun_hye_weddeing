@@ -1,0 +1,89 @@
+@use "styles/tokens/motion" as m;
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.dialog {
+  width: min(420px, calc(100vw - #{s.$gap-8}));
+  max-height: calc(100dvh - #{s.$gap-10});
+  padding: s.$gap-7;
+  overflow-y: auto;
+
+  // 섹션의 가운데 정렬을 물려받지 않는다
+  text-align: left;
+  border: 1px solid var(--border-subtle);
+  border-radius: s.$shape-lg;
+  color: var(--text-primary);
+  background-color: var(--surface-page);
+  box-shadow: var(--shadow-raised);
+  overscroll-behavior: contain;
+
+  &[open] {
+    animation: dialog-in m.$duration-slow m.$ease-out;
+  }
+
+  &::backdrop {
+    background-color: var(--surface-backdrop);
+    animation: backdrop-in m.$duration-base m.$ease-standard;
+  }
+
+  @include media.reduced-motion {
+    &[open],
+    &::backdrop {
+      animation: none;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: s.$gap-4;
+    margin-bottom: s.$gap-3;
+  }
+
+  &__title {
+    color: var(--text-brand);
+
+    @include t.heading-medium;
+  }
+
+  &__close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: s.$shape-full;
+    color: var(--text-tertiary);
+
+    &:hover {
+      color: var(--text-primary);
+      background-color: var(--accent-tint);
+    }
+  }
+
+  &__description {
+    color: var(--text-secondary);
+
+    @include t.body-small;
+  }
+
+  &__body {
+    margin-top: s.$gap-7;
+  }
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}

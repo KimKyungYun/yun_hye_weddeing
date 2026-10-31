@@ -1,0 +1,114 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/utils/media" as media;
+
+.photo-modal {
+  width: 100vw;
+  max-width: none;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--text-on-inverse);
+  background-color: var(--surface-photo-viewer);
+
+  &[open] {
+    animation: photo-in 0.3s ease;
+  }
+
+  &::backdrop {
+    background-color: var(--surface-photo-viewer);
+  }
+
+  @include media.reduced-motion {
+    &[open] {
+      animation: none;
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: calc(#{s.$gap-5} + #{s.$safe-top});
+    right: calc(#{s.$gap-5} + #{s.$safe-right});
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    font-size: 2.5rem;
+    line-height: 1;
+    opacity: 0.7;
+    transform: translateY(-50%);
+    transition: opacity 0.3s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &--prev {
+      left: calc(#{s.$gap-3} + #{s.$safe-left});
+    }
+
+    &--next {
+      right: calc(#{s.$gap-3} + #{s.$safe-right});
+    }
+  }
+
+  &__stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 3.5rem 2.5rem;
+    user-select: none;
+    touch-action: pan-y;
+
+    @include media.desktop-up {
+      padding: 4rem;
+    }
+  }
+
+  &__image {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
+  }
+
+  &__counter {
+    position: absolute;
+    bottom: calc(#{s.$gap-7} + #{s.$safe-bottom});
+    left: 50%;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    letter-spacing: 2px;
+    color: var(--text-on-inverse-muted);
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes photo-in {
+  from {
+    opacity: 0;
+  }
+}

@@ -1,0 +1,20 @@
+@use "styles/patterns/button";
+@use "styles/tokens/spacing" as s;
+
+.map-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: s.$gap-3;
+
+  &__link {
+    width: 100%;
+    min-height: 44px;
+
+    @include button.outline(s.$gap-3);
+  }
+
+  &__icon {
+    width: auto;
+    height: 20px;
+  }
+}

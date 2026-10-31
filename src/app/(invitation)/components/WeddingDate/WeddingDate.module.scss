@@ -1,0 +1,94 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.wedding-date {
+  padding: s.$gap-12 0;
+  background-color: var(--surface-warm);
+
+  &__inner {
+    max-width: s.$inner-max;
+    margin: 0 auto;
+    padding: 0 s.$gap-7;
+    text-align: center;
+
+    @include media.desktop-up {
+      max-width: s.$inner-max-desktop;
+    }
+  }
+
+  &__date {
+    font-family: var(--font-serif);
+    font-size: 1.625rem;
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--text-primary);
+
+    @include t.numeric;
+  }
+
+  &__time {
+    margin-top: s.$gap-2;
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--text-secondary);
+  }
+
+  // 위아래 가는 선 사이에 달력
+  &__calendar {
+    margin: s.$gap-8 0;
+    padding: s.$gap-7 0;
+    border-top: 1px solid var(--border-default);
+    border-bottom: 1px solid var(--border-default);
+  }
+
+  &__weekdays,
+  &__days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: s.$gap-2;
+  }
+
+  &__weekdays {
+    margin-bottom: s.$gap-4;
+  }
+
+  &__weekday {
+    font-family: var(--font-serif);
+    font-size: 0.875rem;
+    color: var(--text-primary);
+
+    &:first-child {
+      color: var(--calendar-sunday);
+    }
+  }
+
+  &__day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    margin: 0 auto;
+    font-family: var(--font-serif);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+
+    // 빈칸까지 세어 7칸마다 일요일
+    &:nth-child(7n + 1) {
+      color: var(--calendar-sunday);
+    }
+
+    &--blank {
+      visibility: hidden;
+    }
+
+    // 일요일 색(nth-child)보다 우선하도록 nth-child(n) 으로 우선순위를 맞춘다
+    &--wedding:nth-child(n) {
+      border-radius: 50%;
+      color: var(--text-on-inverse);
+      background-color: var(--accent);
+    }
+  }
+}

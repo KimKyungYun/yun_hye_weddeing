@@ -1,0 +1,99 @@
+@use "styles/tokens/motion" as m;
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.confirm-delete {
+  &__trigger {
+    padding: s.$gap-2 s.$gap-3;
+    border: 0;
+    border-radius: s.$shape-sm;
+    color: var(--status-danger);
+    background: none;
+
+    @include t.label-small;
+
+    &:hover {
+      background-color: var(--status-danger-tint);
+    }
+  }
+
+  &__dialog {
+    width: min(420px, calc(100vw - 32px));
+    padding: 0;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-lg;
+    color: var(--text-primary);
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-raised);
+
+    &[open] {
+      animation: confirm-in m.$duration-slow m.$ease-spring;
+    }
+
+    &::backdrop {
+      background-color: var(--surface-backdrop);
+      animation: confirm-backdrop-in m.$duration-base m.$ease-standard;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &[open],
+      &::backdrop {
+        animation: none;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-4;
+    padding: s.$gap-8 s.$gap-7 s.$gap-7;
+  }
+
+  &__title {
+    @include t.heading-medium;
+  }
+
+  &__description {
+    color: var(--text-secondary);
+
+    @include t.body-small;
+  }
+
+  &__error {
+    color: var(--status-danger);
+
+    @include t.label-small;
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: s.$gap-3;
+    margin-top: s.$gap-4;
+  }
+
+  &__cancel {
+    min-height: 44px;
+    padding: 0 s.$gap-6;
+    border: 1px solid var(--border-default);
+    border-radius: s.$shape-md;
+    color: var(--text-primary);
+    background-color: var(--surface-card);
+
+    @include t.label-medium;
+  }
+}
+
+@keyframes confirm-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+
+@keyframes confirm-backdrop-in {
+  from {
+    opacity: 0;
+  }
+}

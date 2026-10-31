@@ -1,0 +1,38 @@
+// Spacing · Shape · Layout
+// 4px 기반. 임의 px 대신 이 변수를 쓴다.
+
+$gap-1: 2px;
+$gap-2: 4px;
+$gap-3: 8px;
+$gap-4: 12px;
+$gap-5: 16px;
+$gap-6: 20px;
+$gap-7: 24px;
+$gap-8: 32px;
+$gap-9: 40px;
+$gap-10: 48px;
+$gap-11: 64px;
+$gap-12: 80px;
+$gap-13: 96px;
+
+$shape-xs: 2px;
+$shape-sm: 4px;
+$shape-md: 8px;
+$shape-lg: 16px;
+$shape-full: 9999px;
+
+// 섹션 안쪽 폭: 모바일 640 → 태블릿 720 → 데스크톱(가운데 칼럼) 440
+$inner-max: 640px;
+$inner-max-tablet: 720px;
+$inner-max-desktop: 440px;
+// 데스크톱에서 청첩장을 휴대폰 폭 칼럼으로 보여 준다
+$column-max: 480px;
+
+$safe-top: env(safe-area-inset-top, 0px);
+$safe-bottom: env(safe-area-inset-bottom, 0px);
+$safe-left: env(safe-area-inset-left, 0px);
+$safe-right: env(safe-area-inset-right, 0px);
+
+$z-leaves: 100;
+$z-curtain: 9999;
+$z-toast: 10000;

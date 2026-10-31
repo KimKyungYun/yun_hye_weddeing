@@ -1,0 +1,83 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.rsvp-list {
+  display: flex;
+  flex-direction: column;
+  gap: s.$gap-3;
+
+  &__card {
+    padding: s.$gap-5;
+    border: 1px solid var(--border-subtle);
+    border-left: 3px solid var(--action-primary);
+    border-radius: s.$shape-md;
+    background-color: var(--surface-card);
+
+    &--declined {
+      border-left-color: var(--border-strong);
+
+      .rsvp-list__status {
+        color: var(--text-tertiary);
+        background-color: var(--surface-warm);
+      }
+    }
+  }
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: s.$gap-3;
+  }
+
+  &__side {
+    color: var(--text-tertiary);
+
+    @include t.caption;
+  }
+
+  &__name {
+    flex: 1;
+    color: var(--text-primary);
+
+    @include t.label-medium;
+
+    font-weight: 500;
+  }
+
+  &__status {
+    padding: s.$gap-1 s.$gap-3;
+    border-radius: s.$shape-full;
+    color: var(--text-brand);
+    background-color: var(--accent-tint-strong);
+
+    @include t.caption;
+  }
+
+  &__meta {
+    display: flex;
+    gap: s.$gap-4;
+    margin-top: s.$gap-2;
+    color: var(--text-tertiary);
+
+    @include t.caption;
+  }
+
+  &__message {
+    margin-top: s.$gap-3;
+    padding-top: s.$gap-3;
+    border-top: 1px dashed var(--border-default);
+    color: var(--text-secondary);
+    white-space: pre-line;
+
+    @include t.body-small;
+  }
+
+  &__empty {
+    padding: s.$gap-8 0;
+    text-align: center;
+    color: var(--text-tertiary);
+
+    @include t.body-small;
+  }
+}

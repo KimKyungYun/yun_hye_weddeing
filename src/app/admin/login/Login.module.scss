@@ -1,0 +1,41 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: s.$gap-8 s.$gap-5;
+  background:
+    radial-gradient(circle at 20% 10%, var(--accent-tint-strong), transparent 50%),
+    var(--surface-page);
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: s.$gap-3;
+    width: min(400px, 100%);
+    padding: s.$gap-9 s.$gap-8;
+    border: 1px solid var(--border-subtle);
+    border-radius: s.$shape-lg;
+    background-color: var(--surface-card);
+    box-shadow: var(--shadow-raised);
+  }
+
+  &__eyebrow {
+    color: var(--accent);
+    letter-spacing: 2px;
+
+    @include t.label-small;
+  }
+
+  &__title {
+    margin-bottom: s.$gap-5;
+    font-family: var(--font-serif);
+    font-size: 1.375rem;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--text-brand);
+  }
+}

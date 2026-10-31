@@ -1,0 +1,29 @@
+node_modules
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+.pnp.*
+
+.next
+out
+build
+next-env.d.ts
+
+.env
+.env.*
+!.env.example
+
+coverage
+*.tsbuildinfo
+
+.DS_Store
+*.log
+
+# oh-my-claudecode 로컬 상태
+.omc
+
+# Prisma 생성 클라이언트 (postinstall 에서 prisma generate)
+/src/generated
+
+# Claude 미리보기 서버 로컬 설정
+.claude

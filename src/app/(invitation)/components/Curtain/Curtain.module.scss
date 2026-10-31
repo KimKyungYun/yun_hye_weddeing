@@ -1,0 +1,122 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+@use "styles/utils/media" as media;
+
+.curtain {
+  position: fixed;
+  inset: 0;
+  z-index: s.$z-curtain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @include media.print {
+    display: none;
+  }
+
+  &__left,
+  &__right {
+    position: absolute;
+    top: 0;
+
+    // 두 장이 1px 겹쳐 가운데 틈으로 뒤쪽 사진이 비치지 않게 한다
+    width: calc(50% + 1px);
+    height: 100%;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.18, 1);
+    will-change: transform;
+
+    // 커튼 천의 은은한 잎사귀 결
+    &::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background:
+        radial-gradient(ellipse 80px 120px at 30% 20%, var(--accent-tint-strong) 0%, transparent 70%),
+        radial-gradient(ellipse 60px 90px at 70% 60%, var(--accent-glow) 0%, transparent 70%),
+        radial-gradient(ellipse 100px 60px at 50% 85%, var(--accent-glow) 0%, transparent 70%);
+      pointer-events: none;
+    }
+  }
+
+  &__left {
+    left: 0;
+    background: linear-gradient(135deg, var(--surface-inverse) 0%, var(--surface-inverse-mid) 40%, var(--surface-inverse-light) 100%);
+  }
+
+  &__right {
+    right: 0;
+    background: linear-gradient(225deg, var(--surface-inverse) 0%, var(--surface-inverse-mid) 40%, var(--surface-inverse-light) 100%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: var(--text-on-inverse);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s ease;
+  }
+
+  &__leaf {
+    margin: 0 auto s.$gap-7;
+    opacity: 0.6;
+  }
+
+  &__subtitle {
+    margin-bottom: s.$gap-7;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    font-weight: 300;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  &__names {
+    margin-bottom: s.$gap-9;
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    font-weight: 300;
+    letter-spacing: 6px;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    gap: s.$gap-3;
+    padding: 0.875rem 2.5rem;
+    border: 1px solid var(--border-on-inverse);
+    border-radius: s.$shape-sm;
+    color: var(--text-on-inverse);
+    background: rgb(255, 255, 255, 0.05);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    transition:
+      background 0.3s ease,
+      border-color 0.3s ease;
+
+    &:hover,
+    &:focus-visible {
+      border-color: var(--border-on-inverse-strong);
+      background: rgb(255, 255, 255, 0.12);
+    }
+  }
+
+  &--open {
+    .curtain__left {
+      transform: translateX(-100%);
+    }
+
+    .curtain__right {
+      transform: translateX(100%);
+    }
+
+    .curtain__content {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+  }
+}

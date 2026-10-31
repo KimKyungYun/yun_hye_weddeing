@@ -1,0 +1,87 @@
+// Typography
+//
+// 제목·본문은 명조(Noto Serif KR), 날짜·라벨·버튼 같은 작은 정보는 고딕(Noto Sans KR).
+// 템플릿처럼 가는 굵기(200~300)와 넓은 자간으로 차분하게 둔다.
+
+@use "styles/utils/media" as media;
+
+// 섹션 제목
+@mixin section-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 300;
+  letter-spacing: 4px;
+
+  @include media.tablet-up {
+    font-size: 1.375rem;
+  }
+}
+
+// 인사말·이야기 같은 긴 글
+@mixin prose {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  font-weight: 300;
+  line-height: 2;
+  white-space: pre-line;
+}
+
+// 섹션 아래 설명 한 줄
+@mixin lead {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+// 버튼·날짜·라벨
+@mixin label-medium {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+@mixin label-small {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+@mixin caption {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 300;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+// 폼 입력·관리자 본문
+@mixin body-medium {
+  font-family: var(--font-sans);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+@mixin body-small {
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+// 대화상자·카드 제목
+@mixin heading-medium {
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+
+// 자릿수를 맞춰 읽는 숫자 (카운트다운·집계)
+@mixin numeric {
+  font-variant-numeric: tabular-nums;
+}

@@ -1,0 +1,68 @@
+@use "styles/tokens/spacing" as s;
+@use "styles/tokens/typography" as t;
+
+.closing {
+  // 세로 사진을 4:3 가로로 잘라 두 사람의 상반신이 가운데 오게 한다
+  &__photo {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background-color: var(--surface-inverse);
+
+    // 사진 전체를 고르게 눌러 가운데 흰 글씨를 띄운다
+    &::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background-color: var(--surface-photo-shade);
+    }
+  }
+
+  &__image {
+    object-fit: cover;
+    object-position: 50% 51%;
+  }
+
+  &__caption {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: s.$gap-2;
+    padding: s.$gap-9 s.$gap-5 0;
+    color: var(--text-on-inverse);
+    text-align: center;
+    text-shadow: 0 1px 8px var(--surface-photo-shade);
+  }
+
+  &__date {
+    font-family: var(--font-serif);
+    font-size: 1.125rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  &__message {
+    font-family: var(--font-serif);
+    font-size: 0.9375rem;
+    font-weight: 300;
+  }
+
+  &__share {
+    padding: s.$gap-9 s.$gap-7 calc(#{s.$gap-9} + #{s.$safe-bottom});
+    text-align: center;
+    background-color: var(--surface-warm);
+  }
+
+  &__signature {
+    margin-top: s.$gap-7;
+    color: var(--text-tertiary);
+
+    @include t.caption;
+
+    letter-spacing: 2px;
+  }
+}
