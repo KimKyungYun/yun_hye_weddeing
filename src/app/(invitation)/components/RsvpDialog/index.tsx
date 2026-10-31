@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Dialog from '../Dialog';
-import { CheckIcon } from '../Icons';
+import { CalendarCheckIcon } from '../Icons';
 import RsvpForm from '../RsvpForm';
 import { useToast } from '../ToastProvider';
 import styles from './RsvpDialog.module.scss';
@@ -19,7 +19,7 @@ export default function RsvpDialog() {
   return (
     <div className={styles['rsvp-dialog']}>
       <button type="button" className={styles['rsvp-dialog__trigger']} onClick={() => setIsOpen(true)}>
-        <CheckIcon />
+        <CalendarCheckIcon />
         참석 의사 전달하기
       </button>
       <Dialog

@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Dialog from '../Dialog';
 import GuestbookForm from '../GuestbookForm';
-import { PenIcon } from '../Icons';
+import { PencilIcon } from '../Icons';
 import { useToast } from '../ToastProvider';
 import styles from './GuestbookWriter.module.scss';
 
@@ -21,7 +21,7 @@ export default function GuestbookWriter() {
     <div className={styles['guestbook-writer']} data-reveal="">
       <div className={styles['guestbook-writer__card']}>
         <span className={styles['guestbook-writer__icon']} aria-hidden="true">
-          <PenIcon size={22} />
+          <PencilIcon size={22} />
         </span>
         <p className={styles['guestbook-writer__text']}>따뜻한 축하의 마음을 남겨 주세요.</p>
         <p className={styles['guestbook-writer__note']}>남겨 주신 글은 신랑·신부에게만 전달됩니다.</p>

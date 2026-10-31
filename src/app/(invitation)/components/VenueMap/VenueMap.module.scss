@@ -38,10 +38,11 @@
     fill: var(--map-road-label);
   }
 
+  // 24칸 격자 그림을 키워 쓰므로 선 굵기도 격자 단위다 (1.5 × 3.3배 ≈ 약도 단위 5)
   &__icon {
     fill: none;
     stroke: var(--map-ink);
-    stroke-width: 4;
+    stroke-width: 1.5;
     stroke-linecap: round;
     stroke-linejoin: round;
 
@@ -51,15 +52,12 @@
     }
   }
 
-  &__rings {
-    fill: none;
-    stroke: var(--map-venue-line);
-    stroke-width: 5;
+  &__pin {
+    fill: var(--map-venue-line);
+  }
 
-    path {
-      fill: var(--map-venue-line);
-      stroke: none;
-    }
+  &__pin-heart {
+    fill: var(--map-block);
   }
 
   &__label {

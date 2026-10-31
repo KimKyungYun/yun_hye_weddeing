@@ -25,4 +25,22 @@
       color: var(--text-brand);
     }
   }
+
+  // 아이콘을 담는 같은 크기의 원 — 카카오는 브랜드 노랑, 링크는 연초록
+  &__badge {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 26px;
+    height: 26px;
+    border-radius: s.$shape-full;
+    color: var(--text-brand);
+    background-color: var(--accent-tint-strong);
+
+    &--kakao {
+      color: var(--kakao-ink);
+      background-color: var(--kakao-bg);
+    }
+  }
 }

@@ -1,9 +1,11 @@
-import { Courgette, Nanum_Pen_Script } from 'next/font/google';
+import { Nanum_Pen_Script } from 'next/font/google';
+import localFont from 'next/font/local';
 
-// 인트로 "We're getting married" — 굵고 기울어진, 글자가 하나하나 또렷한 영문 필기체
-export const scriptFont = Courgette({
+// 인트로 "We're getting married" — 붓으로 쓴 서명체 Breathing (Din Studio, 개인용 무료 라이선스).
+// 원본 TTF(650KB)에서 라틴 기본 글자·따옴표만 남기고 woff2 로 줄였다(133KB). 상업적으로 쓰려면 라이선스를 사야 한다.
+export const scriptFont = localFont({
+  src: '../../assets/fonts/breathing-personal-use.woff2',
   weight: '400',
-  subsets: ['latin'],
   variable: '--font-script',
   display: 'swap',
 });

@@ -1,3 +1,4 @@
+import { BusGlyph } from '../Icons';
 import styles from './VenueMap.module.scss';
 
 interface VenueMapProps {
@@ -16,13 +17,13 @@ function ParkingBadge({ x, y }: { x: number; y: number }) {
   );
 }
 
+// 아이콘은 24칸 격자 그림을 ICON_SCALE 배로 키워 쓴다 (오시는 길의 교통 아이콘과 같은 그림)
+const ICON_SCALE = 3.3;
+
 function BusIcon({ x, y }: { x: number; y: number }) {
   return (
-    <g className={styles['venue-map__icon']} transform={`translate(${x} ${y})`}>
-      <rect x="2" y="2" width="52" height="56" rx="11" />
-      <path d="M2 32 H54 M15 58 V66 M41 58 V66 M13 17 H43" />
-      <circle cx="16" cy="45" r="3.5" />
-      <circle cx="40" cy="45" r="3.5" />
+    <g className={styles['venue-map__icon']} transform={`translate(${x} ${y}) scale(${ICON_SCALE})`}>
+      <BusGlyph />
     </g>
   );
 }
@@ -55,26 +56,28 @@ export default function VenueMap({ highlight }: VenueMapProps) {
       <text className={styles['venue-map__road-label']} x="1202" y="838" textAnchor="end">동부네거리 방면</text>
 
       {/* 대전복합터미널 동관 (이마트) */}
-      <BusIcon x={316} y={286} />
+      <BusIcon x={303} y={290} />
       <text className={styles['venue-map__label']} x="343" y="420" textAnchor="middle">대전복합터미널</text>
       <text className={styles['venue-map__label']} x="343" y="478" textAnchor="middle">동관</text>
-      <g className={styles['venue-map__icon']} transform="translate(166 662) scale(1.2)">
-        <path d="M0 4 H8 L16 34 H40 L46 14 H11" />
-        <circle cx="19" cy="42" r="3" />
-        <circle cx="37" cy="42" r="3" />
+      <g className={styles['venue-map__icon']} transform={`translate(152 648) scale(${ICON_SCALE})`}>
+        <path d="M3 4.5h2.2l2.2 10.2c.1.5.5.8 1 .8h8.4c.5 0 .9-.3 1-.8L19.5 8H6" />
+        <circle cx="9.5" cy="19" r="1.4" />
+        <circle cx="16" cy="19" r="1.4" />
       </g>
       <text className={styles['venue-map__label']} x="192" y="770" textAnchor="middle">이마트</text>
 
       {/* 대전복합터미널 서관 (하차지) — 이름이 블록보다 길어 도면처럼 오른쪽으로 넘친다 */}
-      <BusIcon x={758} y={234} />
+      <BusIcon x={746} y={236} />
       <text className={styles['venue-map__label']} x="860" y="370" textAnchor="middle">대전복합터미널</text>
       <text className={styles['venue-map__label']} x="860" y="428" textAnchor="middle">서관 (하차지)</text>
 
-      {/* 씨엘드포레 웨딩홀 */}
-      <g className={styles['venue-map__rings']} transform="translate(708 970) scale(1.3)">
-        <circle cx="26" cy="34" r="22" />
-        <circle cx="50" cy="34" r="22" />
-        <path d="M18 8 L26 0 L34 8 L26 14 Z" />
+      {/* 씨엘드포레 웨딩홀 — 목적지 하트 핀 (핀 끝이 건물 위에 닿는다) */}
+      <g className={styles['venue-map__pin']} transform="translate(727 967) scale(3.6)">
+        <path d="M12 22s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z" />
+        <path
+          className={styles['venue-map__pin-heart']}
+          d="M12 13.6c-2-1.2-2.9-2.2-2.9-3.2 0-.9.6-1.5 1.4-1.5.6 0 1.2.4 1.5.9.3-.5.9-.9 1.5-.9.8 0 1.4.6 1.4 1.5 0 1-.9 2-2.9 3.2z"
+        />
       </g>
       <text className={cx('venue-map__label', 'venue-map__label--venue')} x="822" y="1036">씨엘드포레</text>
 

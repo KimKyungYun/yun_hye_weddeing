@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { BRIDE, GROOM, USE_CURTAIN } from '@/constants/wedding';
-import { LeafHeartIcon } from '../Icons';
+import { OpenLetterIcon } from '../Icons';
 import { useInvitation } from '../InvitationProvider';
 import styles from './Curtain.module.scss';
 
@@ -33,17 +33,29 @@ export default function Curtain() {
       <div className={styles.curtain__left} />
       <div className={styles.curtain__right} />
       <div className={styles.curtain__content}>
-        <svg className={styles.curtain__leaf} width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true">
-          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c1.5-3 2-6.5 2-10S13.5 5 12 2z" />
-          <path d="M12 2c3 1.5 5 5 5 10s-2 8.5-5 10" />
-          <path d="M2 12h20" />
+        {/* 표지 문양: 하트로 봉한 초대장 봉투 */}
+        <svg
+          className={styles.curtain__emblem}
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.1"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="2.5" y="5.5" width="19" height="13" rx="1.5" />
+          <path d="M2.8 6.2 12 13l9.2-6.8M2.8 17.8l6.6-5.4M21.2 17.8l-6.6-5.4" />
+          <path fill="currentColor" stroke="none" d="M12 15.6c-1.9-1.1-2.7-2.1-2.7-3 0-.8.6-1.4 1.3-1.4.6 0 1.1.3 1.4.8.3-.5.8-.8 1.4-.8.7 0 1.3.6 1.3 1.4 0 .9-.8 1.9-2.7 3z" />
         </svg>
         <p className={styles.curtain__subtitle}>Wedding Invitation</p>
         <p className={styles.curtain__names}>
           {GROOM.name} &amp; {BRIDE.name}
         </p>
         <button type="button" className={styles.curtain__button} onClick={open} disabled={phase !== 'closed'}>
-          <LeafHeartIcon />
+          <OpenLetterIcon />
           초대장 열기
         </button>
       </div>

@@ -72,11 +72,15 @@ export default function ShareActions() {
         <Script src={KAKAO_SDK_SRC} integrity={KAKAO_SDK_INTEGRITY} crossOrigin="anonymous" strategy="lazyOnload" onLoad={initKakao} />
       )}
       <button type="button" className={styles.share__button} onClick={shareToKakao}>
-        <KakaoTalkIcon />
+        <span className={`${styles.share__badge} ${styles['share__badge--kakao']}`}>
+          <KakaoTalkIcon size={16} />
+        </span>
         카카오톡 공유하기
       </button>
       <button type="button" className={styles.share__button} onClick={copyLink}>
-        <LinkIcon />
+        <span className={styles.share__badge}>
+          <LinkIcon size={14} />
+        </span>
         링크주소 복사하기
       </button>
     </div>

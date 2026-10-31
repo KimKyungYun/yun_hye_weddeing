@@ -16,13 +16,22 @@ export default function BgmToggle() {
       aria-pressed={isBgmPlaying}
       aria-label={isBgmPlaying ? '배경음악 끄기' : '배경음악 켜기'}
     >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-        <path d="M4 9v6h4l5 4V5L8 9H4z" />
-        {isBgmPlaying ? (
-          <path d="M16 9.5a3.5 3.5 0 010 5M18.5 7a7 7 0 010 10" />
-        ) : (
-          <path d="M16.5 9.5l5 5M21.5 9.5l-5 5" />
-        )}
+      {/* 음표 — 꺼져 있으면 사선을 긋는다 */}
+      <svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M9 17.5V6.2l10-2.2v11.5M9 9.2l10-2.2" />
+        <circle cx="6.6" cy="17.5" r="2.4" />
+        <circle cx="16.6" cy="15.5" r="2.4" />
+        {!isBgmPlaying && <path d="M3.5 3.5l17 17" />}
       </svg>
     </button>
   );
