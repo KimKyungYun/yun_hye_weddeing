@@ -1,8 +1,13 @@
 import { COUPLE_TITLE, WEDDING, WEDDING_DATE } from '@/constants/wedding';
+import { resolveSiteUrl } from '@/utils/siteUrl';
 import { formatWeddingDate } from '@/utils/weddingDate';
 
-// OG 이미지·카카오톡 공유의 절대 주소 기준. 배포 도메인을 NEXT_PUBLIC_SITE_URL 에 넣는다.
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000';
+// OG 이미지·카카오톡 공유의 절대 주소 기준. 비었거나 localhost 면 Vercel 운영 도메인으로 바꿔 쓴다(utils/siteUrl).
+// 두 값 모두 NEXT_PUBLIC_ 이라 빌드 때 박혀 브라우저(카카오톡 공유)에서도 같은 주소를 쓴다.
+export const SITE_URL = resolveSiteUrl(
+  process.env.NEXT_PUBLIC_SITE_URL,
+  process.env.NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL,
+);
 
 // 링크 미리보기(메타 태그)와 카카오톡 공유 카드에 같은 문구를 쓴다
 export const SITE_TITLE = `${COUPLE_TITLE} 결혼합니다`;
